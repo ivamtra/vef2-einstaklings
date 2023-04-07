@@ -22,6 +22,9 @@ model User {
   friends             Friends[]
   posts               Post[]
   comments            Comment[]
+
+  messagesSent     Message[] @relation("sender")
+  messagesRecieved Message[] @relation("reciever")
 }
 
 model Friends {
@@ -29,8 +32,8 @@ model Friends {
   userId1   Int
   userId2   Int
   createdAt DateTime @default(now())
-  // Nog að hafa eina tengingu held eg
-  User      User     @relation(fields: [userId1], references: [id])
+  // Nog að hafa eina tengingu við user því þetta er 2 way tenging
+  user      User     @relation(fields: [userId1], references: [id])
 
   @@unique([userId1, userId2])
 }
@@ -60,4 +63,6 @@ model Message {
   recievingId Int
   senderId    Int
   createdAt   DateTime @default(now())
+  reciever    User?    @relation("reciever", fields: [recievingId], references: [id])
+  sender      User?    @relation("sender", fields: [senderId], references: [id])
 }
