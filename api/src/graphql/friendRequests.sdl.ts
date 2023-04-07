@@ -11,6 +11,8 @@ export const schema = gql`
   type Query {
     friendRequests: [FriendRequest!]! @requireAuth
     friendRequest(id: Int!): FriendRequest @requireAuth
+    recievingFriendRequests(userId: Int!): [FriendRequest!]! @skipAuth
+    sentFriendRequests(userId: Int!): [FriendRequest!]! @skipAuth
   }
 
   input CreateFriendRequestInput {

@@ -1,4 +1,5 @@
 import type { Prisma, FriendRequest } from '@prisma/client'
+
 import type { ScenarioData } from '@redwoodjs/testing/api'
 
 export const standard = defineScenario<Prisma.FriendRequestCreateArgs>({

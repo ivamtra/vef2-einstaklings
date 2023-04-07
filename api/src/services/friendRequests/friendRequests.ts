@@ -10,6 +10,26 @@ export const friendRequests: QueryResolvers['friendRequests'] = () => {
   return db.friendRequest.findMany()
 }
 
+export const recievingFriendRequests: QueryResolvers['friendRequests'] = ({
+  userId,
+}: any) => {
+  return db.friendRequest.findMany({
+    where: {
+      recieverId: userId,
+    },
+  })
+}
+
+export const sentFriendRequests: QueryResolvers['friendRequests'] = ({
+  userId,
+}: any) => {
+  return db.friendRequest.findMany({
+    where: {
+      senderId: userId,
+    },
+  })
+}
+
 export const friendRequest: QueryResolvers['friendRequest'] = ({ id }) => {
   return db.friendRequest.findUnique({
     where: { id },
