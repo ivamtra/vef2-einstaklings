@@ -11,23 +11,24 @@ generator client {
 // Define your own datamodels here and run `yarn redwood prisma migrate dev`
 // to create migrations for them and apply to your dev DB.
 model User {
-  id                  Int       @id @default(autoincrement())
-  name                String?
-  email               String    @unique
-  hashedPassword      String
-  salt                String
-  resetToken          String?
-  resetTokenExpiresAt DateTime?
-  createdAt           DateTime  @default(now())
-  friends             Friends[]
-  posts               Post[]
-  comments            Comment[]
-
-  messagesSent     Message[] @relation("sender")
-  messagesRecieved Message[] @relation("reciever")
+  id                     Int             @id @default(autoincrement())
+  name                   String?
+  email                  String          @unique
+  hashedPassword         String
+  salt                   String
+  resetToken             String?
+  resetTokenExpiresAt    DateTime?
+  createdAt              DateTime        @default(now())
+  friends                Friendship[]
+  posts                  Post[]
+  comments               Comment[]
+  sentFriendRequests     FriendRequest[] @relation("sender")
+  recievedFriendRequests FriendRequest[] @relation("reciever")
+  messagesSent           Message[]       @relation("sender")
+  messagesRecieved       Message[]       @relation("reciever")
 }
 
-model Friends {
+model Friendship {
   id        Int      @id @default(autoincrement())
   userId1   Int
   userId2   Int
@@ -36,6 +37,17 @@ model Friends {
   user      User     @relation(fields: [userId1], references: [id])
 
   @@unique([userId1, userId2])
+}
+
+model FriendRequest {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  // Nog að hafa eina tengingu við user því þetta er 2 way tenging
+
+  sender     User @relation("sender", fields: [senderId], references: [id])
+  senderId   Int
+  reciever   User @relation("reciever", fields: [recieverId], references: [id])
+  recieverId Int
 }
 
 model Post {
@@ -58,11 +70,11 @@ model Comment {
 }
 
 model Message {
-  id          Int      @id @default(autoincrement())
-  message     String
-  recievingId Int
-  senderId    Int
-  createdAt   DateTime @default(now())
-  reciever    User?    @relation("reciever", fields: [recievingId], references: [id])
-  sender      User?    @relation("sender", fields: [senderId], references: [id])
+  id         Int      @id @default(autoincrement())
+  message    String
+  recieverId Int
+  senderId   Int
+  createdAt  DateTime @default(now())
+  reciever   User     @relation("reciever", fields: [recieverId], references: [id])
+  sender     User     @relation("sender", fields: [senderId], references: [id])
 }

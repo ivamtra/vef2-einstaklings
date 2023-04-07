@@ -18,6 +18,37 @@ export default async () => {
     // { name: 'jackie', email: 'jackie@example.com' },
     // { name: 'bob', email: 'bob@example.com' },
     // ]
+
+    const userData = [
+      {
+        email: 'Placeholder',
+        hashedPassword: 'Placeholder',
+        salt: 'salt',
+      },
+      {
+        email: 'ivan',
+        hashedPassword:
+          'f01d1e7dc3eff50d1addc98cd59197d9b65833495704f8083a8eb3994630f41e',
+        salt: 'b8c776ee8e770532d01c1a913bf69553',
+      },
+      {
+        email: 'test',
+        hashedPassword: 'asdasdjkasdffasdjk',
+        salt: 'ASDA',
+      },
+      {
+        email: 'admin',
+        hashedPassword:
+          'd0837ca0bdadc1d10c793292a5440b840a4cfbaf6e37da0c675f2fc9a2497107',
+        salt: '20673fcd6c9c813ee3a037da0809fb3f',
+      },
+      {
+        email: 'moderator',
+        hashedPassword:
+          '653b6a461d86c070381dc773bc8dc5e9c14108b5267fbec0ec7615a94f7c29a0',
+        salt: 'db4cca0d8840b936efc83189d3569410',
+      },
+    ]
     console.log(
       "\nUsing the default './scripts/seed.{js,ts}' template\nEdit the file to add seed data\n"
     )
@@ -45,17 +76,9 @@ export default async () => {
     //     { name: 'jane', email: 'jane@example.com', password: 'secret2' }
     //   ]
     //
-    //   for (user of users) {
-    //     const [hashedPassword, salt] = hashPassword(user.password)
-    //     await db.user.create({
-    //       data: {
-    //         name: user.name,
-    //         email: user.email,
-    //         hashedPassword,
-    //         salt
-    //       }
-    //     })
-    //   }
+    for (const user of userData) {
+      await db.user.create({ data: user })
+    }
   } catch (error) {
     console.warn('Please define your seed data.')
     console.error(error)
