@@ -9,8 +9,6 @@ import {
   useQuery,
 } from '@redwoodjs/web'
 
-import FriendshipsCell from '../FriendshipsCell'
-
 export const QUERY = gql`
   query FindUserQuery($id: Int!) {
     user: user(id: $id) {
@@ -54,6 +52,7 @@ export const Success = ({
   useEffect(() => {
     console.log(data?.friends[0].id)
   })
+  // TODO error höndlun
   const { loading, data, error } = useQuery(friendsQuery, {
     variables: { userId: user.id },
   })
@@ -62,6 +61,9 @@ export const Success = ({
       <p>{user.email}</p>
       <img src="https://picsum.photos/200" alt="" />
       <h4 className="text-xl">Friends</h4>
+      {/* Listi af vinum */}
+
+      {/* TODO Setja i component */}
       {data?.friends?.map((friend) => {
         return (
           <>
@@ -72,8 +74,7 @@ export const Success = ({
           </>
         )
       })}
-      <FriendshipsCell userId={user.id} />
-      {/* Listi af vinum */}
+      {/* TODO Setja i component */}
     </div>
   )
 }
