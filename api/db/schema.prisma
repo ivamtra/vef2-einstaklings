@@ -15,6 +15,7 @@ model User {
   hashedPassword         String
   salt                   String
   resetToken             String?
+  profilePic             String?
   resetTokenExpiresAt    DateTime?
   createdAt              DateTime        @default(now())
   friends                Friendship[]

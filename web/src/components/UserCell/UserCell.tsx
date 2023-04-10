@@ -30,6 +30,7 @@ export const friendsQuery = gql`
       friends {
         userId2
       }
+      profilePic
     }
   }
 `
