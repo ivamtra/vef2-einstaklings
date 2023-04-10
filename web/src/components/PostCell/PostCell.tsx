@@ -11,6 +11,7 @@ export const QUERY = gql`
       user {
         id
         email
+        profilePic
       }
       createdAt
     }
@@ -31,12 +32,23 @@ export const Success = ({
   post,
 }: CellSuccessProps<FindPostQuery, FindPostQueryVariables>) => {
   return (
-    <div className="rounded bg-white p-4 shadow-md">
-      <Link to={routes.post({ id: post.id })}>Link</Link>
-      <p>Post id {post.id}</p>
+    <div className="  flex flex-col rounded bg-white p-4 shadow-md">
+      <Link to={routes.profile({ id: post.user.id })}>
+        <img
+          src={post.user.profilePic}
+          className="w-[30px] rounded-xl"
+          alt=""
+        />
+      </Link>
+
       <p className="text-gray-800">{post.body}</p>
       <Link to={routes.profile({ id: post.user.id })}>
-        <p className="mt-2 text-gray-600">{post.user.email}</p>
+        <p
+          className=" mt-2 text-gray-600"
+          style={{ overflowWrap: 'break-word' }}
+        >
+          {post.user.email}
+        </p>
       </Link>
 
       <p className="mt-2 text-gray-600">

@@ -21281,6 +21281,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-icons@npm:^4.8.0":
+  version: 4.8.0
+  resolution: "react-icons@npm:4.8.0"
+  peerDependencies:
+    react: "*"
+  checksum: fd8e6656ce863ca739e079a321fe122bcf21708270ddac4ce32b7e1f333a9957f97eca08f58c4837057e23355749a9b80569978a67adc734cb4a1dfdc506ba3f
+  languageName: node
+  linkType: hard
+
 "react-inspector@npm:^5.1.0":
   version: 5.1.1
   resolution: "react-inspector@npm:5.1.1"
@@ -22053,6 +22062,7 @@ __metadata:
     "@redwoodjs/core": 4.4.3
     firebase: ^9.19.1
     prettier-plugin-tailwindcss: ^0.2.7
+    react-icons: ^4.8.0
   languageName: unknown
   linkType: soft
 

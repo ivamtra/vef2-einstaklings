@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 
@@ -6,9 +6,9 @@ import { FileField, Form, Submit } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/dist/toast'
 
-import { projectStorage } from '../../../../api/firebase/config'
+import { useAuth } from 'src/auth'
 
-//TODO: Passa að mynd sé uploaduð
+import { projectStorage } from '../../../../api/firebase/config'
 
 // GraphQL
 
@@ -30,6 +30,7 @@ const ImageForm = () => {
 
   const [fileUrl, setFileUrl] = useState('')
   const [showImage, setShowImage] = useState(false)
+  const { currentUser } = useAuth()
 
   const uploadToFireBase = (data) => {
     console.log(data)
@@ -44,7 +45,8 @@ const ImageForm = () => {
         // Hér þarf að kalla á createImage
         changeImage({
           variables: {
-            id: 1,
+            // Todo current user
+            id: currentUser.id,
             input: {
               profilePic: url,
             },
@@ -66,29 +68,24 @@ const ImageForm = () => {
     uploadToFireBase(data)
   }
   return (
-    <>
-      <div>
-        <h2>{'ImageForm'}</h2>
-      </div>
+    <div className="text-center">
+      <h2 className="mb-4 text-2xl font-semibold">Change profile picture</h2>
       <Form onSubmit={onSubmit} className="img-form">
-        {/* Þessi ma vera required */}
-
+        {/* This field is required */}
         <FileField
           className="file-field"
           name="file"
           onChange={onChange}
           required
         />
-        <Submit className="submit">Submit</Submit>
+        <Submit className="mt-4 rounded bg-blue-500 px-4 py-2 font-semibold text-white transition duration-200 hover:bg-blue-600">
+          Submit
+        </Submit>
       </Form>
-      {showImage ? (
-        <>
-          <img style={{ width: '300px' }} src={fileUrl} alt="Poop" />
-        </>
-      ) : (
-        <></>
+      {showImage && (
+        <img className="mx-auto mt-4 max-w-[300px]" src={fileUrl} alt="" />
       )}
-    </>
+    </div>
   )
 }
 

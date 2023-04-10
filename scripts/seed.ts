@@ -8,83 +8,57 @@ import { db } from 'api/src/lib/db'
 
 export const userData = [
   {
-    id: 100,
-    email: 'Placeholder',
-    hashedPassword: 'Placeholder',
-    salt: 'salt',
-  },
-  {
-    id: 200,
-    email: 'ivan',
-    hashedPassword:
-      'f01d1e7dc3eff50d1addc98cd59197d9b65833495704f8083a8eb3994630f41e',
-    salt: 'b8c776ee8e770532d01c1a913bf69553',
-  },
-  {
-    id: 3,
-    email: 'test',
-    hashedPassword: 'asdasdjkasdffasdjk',
-    salt: 'ASDA',
-  },
-  {
-    id: 4,
-    email: 'admin',
-    hashedPassword:
-      'd0837ca0bdadc1d10c793292a5440b840a4cfbaf6e37da0c675f2fc9a2497107',
-    salt: '20673fcd6c9c813ee3a037da0809fb3f',
-  },
-  {
-    id: 5,
-    email: 'moderator',
-    hashedPassword:
-      '653b6a461d86c070381dc773bc8dc5e9c14108b5267fbec0ec7615a94f7c29a0',
-    salt: 'db4cca0d8840b936efc83189d3569410',
-  },
-  {
     id: 1,
-    email: 'test1',
+    name: 'John Doe',
+    email: 'johndoe@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
     id: 2,
-    email: 'test2',
+    name: 'Jane Smith',
+    email: 'janesmith@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
-    id: 8,
-    email: 'test3',
+    id: 3,
+    name: 'Michael Johnson',
+    email: 'michaeljohnson@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
-    id: 9,
-    email: 'test4',
+    id: 4,
+    name: 'Emily Davis',
+    email: 'emilydavis@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
-    id: 10,
-    email: 'test5',
+    id: 5,
+    name: 'David Martinez',
+    email: 'davidmartinez@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57',
   },
   {
-    id: 11,
-    email: 'test6',
+    id: 6,
+    name: 'Olivia Johnson',
+    email: 'oliviajohnson@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
-    email: 'test7',
-    id: 12,
+    id: 7,
+    name: 'Daniel Wilson',
+    email: 'danielwilson@example.com',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',

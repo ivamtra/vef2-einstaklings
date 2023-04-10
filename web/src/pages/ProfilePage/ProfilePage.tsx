@@ -7,8 +7,6 @@ const ProfilePage = ({ id }) => {
     <>
       <MetaTags title="Profile" description="Profile page" />
 
-      <h1>ProfilePage</h1>
-
       <UserCell id={id} />
     </>
   )

@@ -22,7 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
                 <p className="text-white">
                   Logged in as{' '}
                   <Link to={routes.profile({ id: currentUser?.id })}>
-                    <strong className="text-white">{currentUser.email}</strong>
+                    <strong className="text-white">{currentUser.name}</strong>
                   </Link>
                 </p>
                 <button
@@ -53,7 +53,7 @@ const Layout = ({ children }: LayoutProps) => {
       </nav>
       <div className="container mx-auto my-4 flex-grow">{children}</div>
       <footer className="bg-gray-300 py-4">
-        <div className="text-center text-gray-800">Chathub</div>
+        <div className="text-center text-gray-800">Chathub®</div>
       </footer>
     </div>
   )
