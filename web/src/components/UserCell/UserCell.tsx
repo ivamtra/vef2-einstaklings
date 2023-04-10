@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
 import {
   type CellSuccessProps,
   type CellFailureProps,
@@ -15,9 +16,6 @@ export const QUERY = gql`
     user: user(id: $id) {
       id
       email
-      friends {
-        userId2
-      }
     }
   }
 `
@@ -52,6 +50,10 @@ export const Success = ({
     console.log(loading)
     console.log(data)
   })
+
+  useEffect(() => {
+    console.log(data?.friends[0].id)
+  })
   const { loading, data, error } = useQuery(friendsQuery, {
     variables: { userId: user.id },
   })
@@ -60,10 +62,18 @@ export const Success = ({
       <p>{user.email}</p>
       <img src="https://picsum.photos/200" alt="" />
       <h4 className="text-xl">Friends</h4>
-      {user.friends.map((item) => {
-        return <ul key={item.userId2}>{item.userId2}</ul>
+      {data?.friends?.map((friend) => {
+        return (
+          <>
+            <ul key={friend.id}>
+              <p>{friend.email}</p>
+              <Link to={routes.profile({ id: friend.id })}>Link</Link>
+            </ul>
+          </>
+        )
       })}
       <FriendshipsCell userId={user.id} />
+      {/* Listi af vinum */}
     </div>
   )
 }
