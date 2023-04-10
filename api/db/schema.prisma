@@ -15,7 +15,7 @@ model User {
   hashedPassword         String
   salt                   String
   resetToken             String?
-  profilePic             String?
+  profilePic             String?         @default("https://firebasestorage.googleapis.com/v0/b/new-facebook-ace12.appspot.com/o/images%2Fmynd.png?alt=media&token=8265cb78-f6b2-4156-9b54-a21fbe257c6c")
   resetTokenExpiresAt    DateTime?
   createdAt              DateTime        @default(now())
   friends                Friendship[]

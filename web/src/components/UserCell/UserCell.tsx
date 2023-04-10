@@ -14,6 +14,7 @@ export const QUERY = gql`
     user: user(id: $id) {
       id
       email
+      profilePic
     }
   }
 `
@@ -59,7 +60,13 @@ export const Success = ({
   return (
     <div>
       <p>{user.email}</p>
-      <img src="https://picsum.photos/200" alt="" />
+      <h4>Profile picture</h4>
+      <img
+        className="w-[200px]"
+        src={user.profilePic ? user.profilePic : 'https://picsum.photos/200'}
+        alt=""
+      />
+      <h4>--------------------------------</h4>
       <h4 className="text-xl">Friends</h4>
       {/* Listi af vinum */}
 

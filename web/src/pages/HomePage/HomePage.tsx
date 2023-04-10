@@ -17,6 +17,9 @@ const HomePage = () => {
       <MetaTags title="Home" description="Home page" />
 
       <div className="container mx-auto mt-10">
+        <Link className="mb-4 text-xl font-bold" to={routes.test()}>
+          Test page
+        </Link>
         <h1 className="mb-4 text-3xl font-bold">HomePage</h1>
         <p className="text-gray-600">
           Find me in <code>./web/src/pages/HomePage/HomePage.tsx</code>
