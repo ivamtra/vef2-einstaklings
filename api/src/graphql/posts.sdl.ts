@@ -10,6 +10,7 @@ export const schema = gql`
 
   type Query {
     posts: [Post!]! @requireAuth
+    postsByFriends(userId: Int!): [Post!]! @skipAuth
     post(id: Int!): Post @requireAuth
   }
 

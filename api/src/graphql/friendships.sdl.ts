@@ -8,6 +8,7 @@ export const schema = gql`
   }
 
   type Query {
+    friendshipsByUser(userId: Int!): [Friendship!]! @requireAuth
     friendships: [Friendship!]! @requireAuth
     friendship(id: Int!): Friendship @requireAuth
   }

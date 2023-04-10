@@ -1,9 +1,4 @@
 // Define your own mock data here:
 export const standard = (/* vars, { ctx, req } */) => ({
-  post: {
-    id: 42,
-    user: {
-      email: 'test',
-    },
-  },
+  friendships: [{ id: 42 }, { id: 43 }, { id: 44 }],
 })

@@ -16,6 +16,10 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
+export const friends: QueryResolvers['users'] = ({ userId }: any) => {
+  return db.$queryRaw`SELECT * FROM user WHERE id in (select userId2 from friendship where userid1 = ${userId})`
+}
+
 export const createUser: MutationResolvers['createUser'] = ({ input }) => {
   return db.user.create({
     data: input,

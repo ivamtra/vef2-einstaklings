@@ -10,9 +10,11 @@ export const posts: QueryResolvers['posts'] = () => {
   return db.post.findMany()
 }
 
-// TODO
 export const postsByFriends: QueryResolvers['posts'] = ({ userId }: any) => {
-  return []
+  // Passar að það se current user áður en query-að
+  if (context.currentUser.id !== userId) return []
+
+  return db.$queryRaw`SELECT * FROM POST WHERE userId in (SELECT userId2 from friendship where userId1 = ${userId}) or userId = ${userId}`
 }
 
 export const post: QueryResolvers['post'] = ({ id }) => {

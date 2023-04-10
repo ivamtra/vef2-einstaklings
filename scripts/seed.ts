@@ -8,13 +8,13 @@ import { db } from 'api/src/lib/db'
 
 export const userData = [
   {
-    id: 1,
+    id: 100,
     email: 'Placeholder',
     hashedPassword: 'Placeholder',
     salt: 'salt',
   },
   {
-    id: 2,
+    id: 200,
     email: 'ivan',
     hashedPassword:
       'f01d1e7dc3eff50d1addc98cd59197d9b65833495704f8083a8eb3994630f41e',
@@ -41,14 +41,14 @@ export const userData = [
     salt: 'db4cca0d8840b936efc83189d3569410',
   },
   {
-    id: 6,
+    id: 1,
     email: 'test1',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
-    id: 7,
+    id: 2,
     email: 'test2',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
@@ -116,6 +116,14 @@ export const postData = [
     body: 'These are some thougts that a person thought were relevant and decided to post for all his friends to see',
   },
   {
+    userId: 1,
+    body: 'User id 1 post 2',
+  },
+  {
+    userId: 1,
+    body: 'User id 1 post 3',
+  },
+  {
     userId: 2,
     body: 'Feeling grateful for a beautiful day spent in nature with loved ones.',
   },
@@ -131,6 +139,15 @@ export const postData = [
     userId: 5,
     body: 'Missing my childhood friend and reminiscing about the good old days.',
   },
+]
+
+// -------------------- Friendships -------------------------
+
+const friendshipData = [
+  { userId1: 1, userId2: 2 },
+  { userId1: 2, userId2: 1 },
+  { userId1: 3, userId2: 1 },
+  { userId1: 1, userId2: 3 },
 ]
 
 // ------------------------------------------------------
@@ -169,6 +186,10 @@ export default async () => {
     //
 
     // Delete all records before adding
+
+    console.log('deleting friendships :(')
+    await db.friendship.deleteMany()
+
     console.log('deleting friend requests...')
     await db.friendRequest.deleteMany()
 
@@ -186,6 +207,9 @@ export default async () => {
       console.log('Created user', user)
     }
 
+    for (const friendship of friendshipData) {
+      await db.friendship.create({ data: friendship })
+    }
     for (const post of postData) {
       await db.post.create({ data: post })
     }
