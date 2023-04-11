@@ -73,6 +73,18 @@ export const friendRequestData = [
     senderId: 1,
   },
   {
+    recieverId: 1,
+    senderId: 5,
+  },
+  {
+    recieverId: 1,
+    senderId: 7,
+  },
+  {
+    recieverId: 1,
+    senderId: 6,
+  },
+  {
     recieverId: 3,
     senderId: 1,
   },

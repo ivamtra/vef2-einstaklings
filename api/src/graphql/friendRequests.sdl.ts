@@ -6,6 +6,7 @@ export const schema = gql`
     senderId: Int!
     reciever: User!
     recieverId: Int!
+    hidden: Boolean!
   }
 
   type Query {
@@ -23,6 +24,7 @@ export const schema = gql`
   input UpdateFriendRequestInput {
     senderId: Int
     recieverId: Int
+    hidden: Boolean!
   }
 
   type Mutation {

@@ -39,14 +39,14 @@ model Friendship {
 }
 
 model FriendRequest {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
   // Nog að hafa eina tengingu við user því þetta er 2 way tenging
-
-  sender     User @relation("sender", fields: [senderId], references: [id])
+  sender     User     @relation("sender", fields: [senderId], references: [id])
   senderId   Int
-  reciever   User @relation("reciever", fields: [recieverId], references: [id])
+  reciever   User     @relation("reciever", fields: [recieverId], references: [id])
   recieverId Int
+  hidden     Boolean  @default(false)
 }
 
 model Post {

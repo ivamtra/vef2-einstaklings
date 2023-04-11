@@ -1,6 +1,11 @@
+import { useState } from 'react'
+
+import { FaUserFriends } from 'react-icons/fa'
+
 import { Link, routes } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
+import FriendRequestsCell from 'src/components/FriendRequestsCell'
 
 type LayoutProps = {
   children?: React.ReactNode
@@ -8,6 +13,7 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const { currentUser, logOut, isAuthenticated } = useAuth()
+  const [showFriendRequests, setShowFriendRequests] = useState(false)
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -18,19 +24,40 @@ const Layout = ({ children }: LayoutProps) => {
           </Link>
           <div>
             {isAuthenticated ? (
-              <div>
-                <p className="text-white">
-                  Logged in as{' '}
-                  <Link to={routes.profile({ id: currentUser?.id })}>
-                    <strong className="text-white">{currentUser.name}</strong>
-                  </Link>
-                </p>
-                <button
-                  onClick={logOut}
-                  className="mt-4 rounded bg-blue-500 px-4 py-2 text-white transition duration-200 hover:bg-blue-600"
-                >
-                  Logout
-                </button>
+              <div className="flex gap-5">
+                <div>
+                  <button
+                    onClick={() => setShowFriendRequests(!showFriendRequests)}
+                  >
+                    <div>
+                      <FaUserFriends className=" w-5 text-white" />
+                    </div>
+                  </button>
+
+                  <div
+                    className={
+                      showFriendRequests ? 'absolute right-[30px]' : 'hidden'
+                    }
+                  >
+                    <FriendRequestsCell userId={currentUser?.id} />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-white">
+                    Logged in as{' '}
+                    <Link to={routes.profile({ id: currentUser?.id })}>
+                      <strong className="text-white">{currentUser.name}</strong>
+                    </Link>
+                  </p>
+                </div>
+                <div className="">
+                  <button
+                    onClick={logOut}
+                    className="rounded bg-blue-500 text-white transition duration-200 hover:bg-blue-600"
+                  >
+                    Logout
+                  </button>
+                </div>
               </div>
             ) : (
               <div>
