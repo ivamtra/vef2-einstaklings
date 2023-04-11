@@ -24,13 +24,19 @@ const Layout = ({ children }: LayoutProps) => {
           </Link>
           <div>
             {isAuthenticated ? (
-              <div className="flex gap-5">
+              <div className="flex items-center justify-between gap-5">
                 <div>
                   <button
                     onClick={() => setShowFriendRequests(!showFriendRequests)}
                   >
                     <div>
-                      <FaUserFriends className=" w-5 text-white" />
+                      <FaUserFriends
+                        className={
+                          !showFriendRequests
+                            ? ' h-8 w-8  rounded-lg  p-[2px] text-white'
+                            : 'h-8 w-8  rounded-lg  bg-white p-[2px] text-blue-500 '
+                        }
+                      />
                     </div>
                   </button>
 
@@ -42,8 +48,8 @@ const Layout = ({ children }: LayoutProps) => {
                     <FriendRequestsCell userId={currentUser?.id} />
                   </div>
                 </div>
-                <div>
-                  <p className="text-white">
+                <div className="flex h-auto items-center justify-center">
+                  <p className=" text-white">
                     Logged in as{' '}
                     <Link to={routes.profile({ id: currentUser?.id })}>
                       <strong className="text-white">{currentUser.name}</strong>
