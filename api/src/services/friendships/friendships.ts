@@ -20,6 +20,25 @@ export const friendshipsByUser: QueryResolvers['friendships'] = ({
   })
 }
 
+// Athuga hvort að vinasamband er til
+export const friendshipByUserIds: QueryResolvers['friendships'] = ({
+  userId1,
+  userId2,
+}: any) => {
+  return db.friendship.findMany({
+    where: {
+      AND: [
+        {
+          userId1,
+        },
+        {
+          userId2,
+        },
+      ],
+    },
+  })
+}
+
 export const friendship: QueryResolvers['friendship'] = ({ id }) => {
   return db.friendship.findUnique({
     where: { id },
