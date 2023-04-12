@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-import { FaUserFriends } from 'react-icons/fa'
 import type { FriendRequestsQuery } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
@@ -30,8 +29,6 @@ export const Success = ({
 
   return (
     <>
-      <FaUserFriends className=" w-5 text-blue-500" />
-
       <ul>
         {recievingFriendRequests.map((item) => {
           return (
