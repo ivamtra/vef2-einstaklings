@@ -1,6 +1,6 @@
 import { Post } from 'types/graphql'
 
-import { Form, Submit, TextAreaField } from '@redwoodjs/forms'
+import { Form, Submit, TextAreaField, useForm } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
@@ -18,9 +18,10 @@ export const CREATE_POST = gql`
 `
 
 const PostForm = () => {
+  const formMethods = useForm()
   const { currentUser } = useAuth()
   const [createPost] = useMutation(CREATE_POST, {
-    refetchQueries: PostsQuery,
+    refetchQueries: [PostsQuery],
     variables: {
       userId: currentUser?.id,
     },
@@ -35,11 +36,15 @@ const PostForm = () => {
         },
       },
     })
+    formMethods.reset()
+
+    // Tæma forminn
   }
   return (
     <Form
       onSubmit={onSubmit}
       className="rounded-lg bg-white px-4 py-3 shadow-md"
+      formMethods={formMethods}
     >
       <TextAreaField
         placeholder="What's on your mind?"

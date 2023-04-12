@@ -5,6 +5,7 @@ import type {
   FindFriendRequestQueryVariables,
 } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
 import {
   type CellSuccessProps,
   type CellFailureProps,
@@ -138,15 +139,19 @@ export const Success = ({
   return (
     <div className="flex flex-col items-center gap-3 rounded-lg border bg-white p-2 sm:flex-row">
       <div className="mb-4 mr-4 sm:mb-0">
-        <img
-          src={friendRequest.sender.profilePic}
-          className="h-10 w-10 rounded-full"
-          alt=""
-        />
+        <Link to={routes.profile({ id: friendRequest.senderId })}>
+          <img
+            src={friendRequest.sender.profilePic}
+            className="h-10 w-10 rounded-full"
+            alt=""
+          />
+        </Link>
       </div>
       <div className="flex-grow">
-        <h4 className="text-lg font-semibold">{friendRequest.sender.name}</h4>
-        <p className="text-gray-600">{`Sent you a friend request`}</p>
+        <Link to={routes.profile({ id: friendRequest.senderId })}>
+          <h4 className="text-lg font-semibold">{friendRequest.sender.name}</h4>
+          <p className="text-gray-600">{`Sent you a friend request`}</p>
+        </Link>
       </div>
       <div className="mt-4 flex gap-2 sm:mt-0">
         <button

@@ -53,7 +53,7 @@ export const Success = ({
   })
 
   useEffect(() => {
-    console.log(data?.friends[0].id)
+    console.log(data?.friends[0]?.id)
   })
   // TODO error höndlun
   const { loading, data, error } = useQuery(friendsQuery, {
