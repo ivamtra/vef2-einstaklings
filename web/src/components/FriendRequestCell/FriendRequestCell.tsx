@@ -33,7 +33,13 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => {
+  return (
+    <div className="flex flex-col items-center gap-3 rounded-lg border bg-white p-2 sm:flex-row">
+      Empty
+    </div>
+  )
+}
 
 export const Failure = ({
   error,

@@ -16,7 +16,13 @@ export const QUERY = gql`
 
 export const Loading = () => <div>Loading...</div>
 
-export const Empty = () => <div>Empty</div>
+export const Empty = () => {
+  return (
+    <div className="absolute right-3/4 flex w-[200px] flex-col items-center justify-center gap-3 rounded-lg border bg-white p-2 sm:flex-row">
+      No friend requests
+    </div>
+  )
+}
 
 export const Failure = ({ error }: CellFailureProps) => (
   <div style={{ color: 'red' }}>Error: {error?.message}</div>

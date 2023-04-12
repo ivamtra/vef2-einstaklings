@@ -9,56 +9,56 @@ import { db } from 'api/src/lib/db'
 export const userData = [
   {
     id: 1,
-    name: 'John Doe',
-    email: 'johndoe@example.com',
+    name: 'John Doe id 1',
+    email: 'test1',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
     id: 2,
-    name: 'Jane Smith',
-    email: 'janesmith@example.com',
+    name: 'Jane Smith id 2',
+    email: 'test2',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
     id: 3,
-    name: 'Michael Johnson',
-    email: 'michaeljohnson@example.com',
+    name: 'Michael Johnson id 3',
+    email: 'test3',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
     id: 4,
-    name: 'Emily Davis',
-    email: 'emilydavis@example.com',
+    name: 'Emily Davis id 4',
+    email: 'test4',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
     id: 5,
-    name: 'David Martinez',
-    email: 'davidmartinez@example.com',
+    name: 'David Martinez id 5',
+    email: 'test5',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57',
   },
   {
     id: 6,
-    name: 'Olivia Johnson',
-    email: 'oliviajohnson@example.com',
+    name: 'Olivia Johnson id 6',
+    email: 'test6',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
   },
   {
     id: 7,
-    name: 'Daniel Wilson',
-    email: 'danielwilson@example.com',
+    name: 'Daniel Wilson id 7',
+    email: 'test7',
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
@@ -68,30 +68,30 @@ export const userData = [
 // -------------------- Friend requests -------------------------
 
 export const friendRequestData = [
-  {
-    recieverId: 2,
-    senderId: 1,
-  },
-  {
-    recieverId: 1,
-    senderId: 5,
-  },
-  {
-    recieverId: 1,
-    senderId: 7,
-  },
-  {
-    recieverId: 1,
-    senderId: 6,
-  },
-  {
-    recieverId: 3,
-    senderId: 1,
-  },
-  {
-    recieverId: 5,
-    senderId: 2,
-  },
+  // {
+  //   recieverId: 2,
+  //   senderId: 1,
+  // },
+  // {
+  //   recieverId: 1,
+  //   senderId: 5,
+  // },
+  // {
+  //   recieverId: 1,
+  //   senderId: 7,
+  // },
+  // {
+  //   recieverId: 1,
+  //   senderId: 6,
+  // },
+  // {
+  //   recieverId: 3,
+  //   senderId: 1,
+  // },
+  // {
+  //   recieverId: 5,
+  //   senderId: 2,
+  // },
 ]
 
 // -------------------- POSTS -------------------------

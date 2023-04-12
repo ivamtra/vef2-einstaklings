@@ -7,7 +7,10 @@ import {
   type CellSuccessProps,
   type CellFailureProps,
   useQuery,
+  useMutation,
 } from '@redwoodjs/web'
+
+import { useAuth } from 'src/auth'
 
 export const QUERY = gql`
   query FindUserQuery($id: Int!) {
@@ -34,6 +37,22 @@ export const friendsQuery = gql`
   }
 `
 
+export const FRIENDSHIP_BY_USER_IDS = gql`
+  query FriendshipByUserIds($userId1: Int!, $userId2: Int!) {
+    friendshipByUserIds(userId1: $userId1, userId2: $userId2) {
+      id
+    }
+  }
+`
+
+export const CREATE_FRIEND_REQUEST = gql`
+  mutation CreateFriendRequest($input: CreateFriendRequestInput!) {
+    createFriendRequest(input: $input) {
+      id
+    }
+  }
+`
+
 export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => <div>Empty</div>
@@ -47,18 +66,43 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
-  useEffect(() => {
-    console.log(loading)
-    console.log(data)
-  })
-
-  useEffect(() => {
-    console.log(data?.friends[0]?.id)
-  })
   // TODO error höndlun
-  const { loading, data, error } = useQuery(friendsQuery, {
+  const {
+    loading,
+    data: friendsData,
+    error,
+  } = useQuery(friendsQuery, {
     variables: { userId: user.id },
   })
+  const { currentUser } = useAuth()
+  useEffect(() => console.log(checkFriendshipData))
+  const { data: checkFriendshipData } = useQuery(FRIENDSHIP_BY_USER_IDS, {
+    variables: {
+      userId1: currentUser?.id,
+      userId2: user.id,
+    },
+  })
+
+  const sendFriendRequest = async () => {
+    const recieverId = user.id
+    const senderId = currentUser?.id
+    try {
+      const response = await createFriendRequest({
+        variables: {
+          input: {
+            recieverId,
+            senderId,
+          },
+        },
+      })
+      console.log(response)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const [createFriendRequest] = useMutation(CREATE_FRIEND_REQUEST)
+
   return (
     <div className="flex flex-col items-center justify-center text-center">
       <p className="text-3xl font-bold text-gray-600">{user.name}</p>
@@ -67,10 +111,32 @@ export const Success = ({
         src={user.profilePic ? user.profilePic : 'https://picsum.photos/200'}
         alt=""
       />
+
+      {/* TODO Setja logic í sér component */}
+
+      {/* TODO:  Athuga hvort að búið er að senda request nú þegar */}
+      {!checkFriendshipData?.friendshipByUserIds &&
+      user.id !== currentUser?.id ? (
+        <div>
+          <button
+            onClick={sendFriendRequest}
+            className="rounded-lg bg-blue-500 px-4 py-2 text-white"
+          >
+            Send friend request
+          </button>
+        </div>
+      ) : (
+        <>
+          <h1>Poop</h1>
+        </>
+      )}
+
+      {/* TODO Setja logic í sér component */}
+
       <h4 className="mt-8 text-xl font-semibold text-gray-600">Friends</h4>
       {/* TODO Setja i component */}
       {/* List of friends */}
-      {data?.friends?.map((friend) => {
+      {friendsData?.friends?.map((friend) => {
         return (
           <ul key={friend.id} className="mt-4">
             <li className="mt-4 flex items-center">

@@ -47,6 +47,8 @@ model FriendRequest {
   reciever   User     @relation("reciever", fields: [recieverId], references: [id])
   recieverId Int
   hidden     Boolean  @default(false)
+
+  @@unique([recieverId, senderId])
 }
 
 model Post {

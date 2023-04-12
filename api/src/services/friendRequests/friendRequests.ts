@@ -20,6 +20,17 @@ export const recievingFriendRequests: QueryResolvers['friendRequests'] = ({
   })
 }
 
+export const sentFriendRequest: QueryResolvers['friendRequest'] = ({
+  recieverId,
+  senderId,
+}: any) => {
+  return db.friendRequest.findFirst({
+    where: {
+      AND: [{ senderId }, { recieverId }],
+    },
+  })
+}
+
 export const sentFriendRequests: QueryResolvers['friendRequests'] = ({
   userId,
 }: any) => {
