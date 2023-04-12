@@ -11,7 +11,7 @@ export const schema = gql`
     friendshipsByUser(userId: Int!): [Friendship!]! @requireAuth
     friendships: [Friendship!]! @requireAuth
     friendship(id: Int!): Friendship @skipAuth
-    friendshipByUserIds(userId1: Int!, userId2: Int!): [Friendship!]! @skipAuth
+    friendshipByUserIds(userId1: Int!, userId2: Int!): Friendship @skipAuth
   }
 
   input CreateFriendshipInput {

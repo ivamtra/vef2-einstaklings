@@ -68,6 +68,7 @@ export const Success = ({
         alt=""
       />
       <h4 className="mt-8 text-xl font-semibold text-gray-600">Friends</h4>
+      {/* TODO Setja i component */}
       {/* List of friends */}
       {data?.friends?.map((friend) => {
         return (

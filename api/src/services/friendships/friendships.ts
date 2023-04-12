@@ -21,11 +21,11 @@ export const friendshipsByUser: QueryResolvers['friendships'] = ({
 }
 
 // Athuga hvort að vinasamband er til
-export const friendshipByUserIds: QueryResolvers['friendships'] = ({
+export const friendshipByUserIds: QueryResolvers['friendship'] = ({
   userId1,
   userId2,
 }: any) => {
-  return db.friendship.findMany({
+  return db.friendship.findFirst({
     where: {
       AND: [
         {
