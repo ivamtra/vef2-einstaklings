@@ -59,9 +59,11 @@ export const Success = ({
 
       <p className="text-gray-800">{post.body}</p>
 
-      <p>Likes: {post.Like.length}</p>
       {/* Like component */}
-      <LikeButton postId={post.id} />
+      <div className="flex gap-2">
+        <LikeButton postId={post.id} />
+        <p>{post.Like.length}</p>
+      </div>
 
       <p className="mt-2 text-gray-600">
         {new Date(post.createdAt).toLocaleString()}

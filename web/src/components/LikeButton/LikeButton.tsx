@@ -74,11 +74,11 @@ const LikeButton = ({ postId }: any) => {
     <div>
       {data?.getLike ? (
         <button onClick={unLike}>
-          <AiFillLike className=" h-6 w-6 text-blue-500" />
+          <AiFillLike className=" h-6 w-6 rounded-lg text-blue-500 hover:bg-slate-100" />
         </button>
       ) : (
         <button onClick={like}>
-          <AiOutlineLike className=" h-6 w-6" />
+          <AiOutlineLike className=" h-6 w-6 rounded-lg hover:bg-slate-100" />
         </button>
       )}
     </div>

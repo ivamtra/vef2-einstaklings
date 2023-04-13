@@ -23,7 +23,7 @@ const CHANGE_IMAGE = gql`
 
 const ImageForm = () => {
   const [changeImage] = useMutation(CHANGE_IMAGE, {
-    onCompleted: () => toast.success('Image uploaded'),
+    onCompleted: () => toast.success('Profile picture successfully changed'),
     onError: () => toast.error('Something went wrong'),
   })
   // Add to firebase

@@ -2,12 +2,14 @@ import { useEffect } from 'react'
 
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
 import {
   type CellSuccessProps,
   type CellFailureProps,
   useQuery,
   useMutation,
 } from '@redwoodjs/web'
+import { toast } from '@redwoodjs/web/dist/toast'
 
 import { useAuth } from 'src/auth'
 
@@ -139,16 +141,27 @@ export const Success = ({
   const [createFriendRequest] = useMutation(CREATE_FRIEND_REQUEST, {
     refetchQueries: [SENT_FRIEND_REQUEST],
     variables: { senderId: currentUser?.id, recieverId: user.id },
+    onCompleted: () => toast.success('Friend request sent'),
+    onError: () => toast.error('Something went wrong'),
   })
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
       <p className="text-3xl font-bold text-gray-600">{user.name}</p>
-      <img
-        className="mx-auto mt-2 h-48 w-48 rounded-full"
-        src={user.profilePic ? user.profilePic : 'https://picsum.photos/200'}
-        alt=""
-      />
+      <div className="flex items-center gap-3">
+        <img
+          className="mx-auto mt-2 h-48 w-48 rounded-full"
+          src={user.profilePic ? user.profilePic : 'https://picsum.photos/200'}
+          alt=""
+        />
+        {currentUser?.id === user.id ? (
+          <Link to={routes.test()} className="text-lg text-blue-500">
+            Change profile picture
+          </Link>
+        ) : (
+          <></>
+        )}
+      </div>
 
       {/* TODO Setja logic í sér component */}
 
