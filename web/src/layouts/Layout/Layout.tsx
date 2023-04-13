@@ -51,16 +51,21 @@ const Layout = ({ children }: LayoutProps) => {
                       <FriendRequestsCell userId={currentUser?.id} />
                     </div>
                   </div>
-                  <div className="flex h-auto items-center justify-center">
-                    <p className=" text-white">
-                      Logged in as{' '}
-                      <Link to={routes.profile({ id: currentUser?.id })}>
+                  <Link to={routes.profile({ id: currentUser?.id })}>
+                    <div className="flex flex h-auto items-center justify-center gap-2">
+                      <p className=" text-white">
+                        Logged in as{' '}
                         <strong className="text-white">
                           {currentUser?.name}
                         </strong>
-                      </Link>
-                    </p>
-                  </div>
+                      </p>
+                      <img
+                        src={currentUser?.profilePic}
+                        alt=""
+                        className="w-8 rounded-full"
+                      />
+                    </div>
+                  </Link>
                   <div className="">
                     <button
                       onClick={logOut}
