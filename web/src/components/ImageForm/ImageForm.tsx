@@ -12,7 +12,7 @@ import { projectStorage } from '../../../../api/firebase/config'
 
 // GraphQL
 
-const CHANGE_IMAGE = gql`
+export const CHANGE_IMAGE = gql`
   mutation changeImage($id: Int!, $input: UpdateUserInput!) {
     updateUser(id: $id, input: $input) {
       id

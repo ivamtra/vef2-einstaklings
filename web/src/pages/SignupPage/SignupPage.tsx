@@ -10,11 +10,12 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 import { Link, navigate, routes } from '@redwoodjs/router'
-import { MetaTags } from '@redwoodjs/web'
+import { MetaTags, useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
-
+import { CHANGE_IMAGE as UPDATE_USER } from 'src/components/ImageForm/ImageForm'
+import { CREATE_FRIEND_REQUEST } from 'src/components/UserCell'
 const SignupPage = () => {
   const { isAuthenticated, signUp } = useAuth()
 
@@ -24,15 +25,23 @@ const SignupPage = () => {
     }
   }, [isAuthenticated])
 
-  // focus on username box on page load
-  const usernameRef = useRef<HTMLInputElement>(null)
+  // focus on email box on page load
+  const emailRef = useRef<HTMLInputElement>(null)
   useEffect(() => {
-    usernameRef.current?.focus()
+    emailRef.current?.focus()
   }, [])
 
+  const [updateUser] = useMutation(UPDATE_USER, {
+    onError: () => toast.error('update user failed'),
+  })
+  const [createFriendRequest] = useMutation(CREATE_FRIEND_REQUEST, {
+    onError: () => toast.error('Create friend request failed'),
+  })
+
   const onSubmit = async (data: Record<string, string>) => {
+    // Búa til aðgang
     const response = await signUp({
-      username: data.username,
+      username: data.email,
       password: data.password,
     })
 
@@ -44,6 +53,33 @@ const SignupPage = () => {
       // user is signed in automatically
       toast.success('Welcome!')
     }
+
+    // ----
+
+    // Uppfæra username
+    const userId = response.id
+    const updateUserResponse = await updateUser({
+      variables: {
+        id: userId,
+        input: {
+          name: data.name,
+        },
+      },
+    })
+
+    console.log(updateUserResponse)
+
+    // Senda vinabeiðni á referral
+
+    const referralId = Number(data.referralId)
+
+    // Senda vinabeiðni á referral
+    const sendFriendRequestResponse = await createFriendRequest({
+      variables: {
+        input: { senderId: userId, recieverId: referralId },
+      },
+    })
+    console.log(sendFriendRequestResponse)
   }
 
   return (
@@ -61,18 +97,19 @@ const SignupPage = () => {
             <div className="rw-segment-main">
               <div className="rw-form-wrapper">
                 <Form onSubmit={onSubmit} className="rw-form-wrapper">
+                  {/* Email */}
                   <Label
-                    name="username"
+                    name="email"
                     className="rw-label"
                     errorClassName="rw-label rw-label-error"
                   >
                     Email
                   </Label>
                   <TextField
-                    name="username"
+                    name="email"
                     className="rw-input"
                     errorClassName="rw-input rw-input-error"
-                    ref={usernameRef}
+                    ref={emailRef}
                     validation={{
                       required: {
                         value: true,
@@ -80,7 +117,53 @@ const SignupPage = () => {
                       },
                     }}
                   />
-                  <FieldError name="username" className="rw-field-error" />
+                  <FieldError name="email" className="rw-field-error" />
+
+                  {/* Name */}
+
+                  <Label
+                    name="name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Name
+                  </Label>
+                  <TextField
+                    name="name"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Email is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="name" className="rw-field-error" />
+
+                  {/* Referral */}
+
+                  <Label
+                    name="name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Referral id
+                  </Label>
+                  <TextField
+                    name="referralId"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Referral id is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="name" className="rw-field-error" />
+
+                  {/* Password */}
 
                   <Label
                     name="password"

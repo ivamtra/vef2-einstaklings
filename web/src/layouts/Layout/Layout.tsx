@@ -56,7 +56,7 @@ const Layout = ({ children }: LayoutProps) => {
                       Logged in as{' '}
                       <Link to={routes.profile({ id: currentUser?.id })}>
                         <strong className="text-white">
-                          {currentUser.name}
+                          {currentUser?.name}
                         </strong>
                       </Link>
                     </p>
