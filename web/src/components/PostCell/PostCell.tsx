@@ -5,6 +5,8 @@ import type { FindPostQuery, FindPostQueryVariables } from 'types/graphql'
 import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import LikeButton from '../LikeButton/LikeButton'
+
 export const QUERY = gql`
   query FindPostQuery($id: Int!) {
     post: post(id: $id) {
@@ -56,6 +58,10 @@ export const Success = ({
       </Link>
 
       <p className="text-gray-800">{post.body}</p>
+
+      <p>Likes: {post.Like.length}</p>
+      {/* Like component */}
+      <LikeButton postId={post.id} />
 
       <p className="mt-2 text-gray-600">
         {new Date(post.createdAt).toLocaleString()}
