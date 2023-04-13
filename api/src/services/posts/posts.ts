@@ -20,6 +20,9 @@ export const postsByFriends: QueryResolvers['posts'] = ({ userId }: any) => {
 export const post: QueryResolvers['post'] = ({ id }) => {
   return db.post.findUnique({
     where: { id },
+    include: {
+      Like: true,
+    },
   })
 }
 

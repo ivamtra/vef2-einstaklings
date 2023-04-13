@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import type { FindPostQuery, FindPostQueryVariables } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
@@ -14,6 +16,10 @@ export const QUERY = gql`
         profilePic
         name
       }
+      Like {
+        postId
+      }
+
       createdAt
     }
   }
@@ -32,6 +38,10 @@ export const Failure = ({
 export const Success = ({
   post,
 }: CellSuccessProps<FindPostQuery, FindPostQueryVariables>) => {
+  useEffect(() => {
+    console.log('postId:', post.id)
+    console.log('likes:', post.Like)
+  })
   return (
     <div className="flex flex-col rounded bg-white p-4 shadow-md">
       <Link to={routes.profile({ id: post.user.id })}>

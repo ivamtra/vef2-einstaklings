@@ -98,10 +98,12 @@ export const friendRequestData = [
 
 export const postData = [
   {
+    id: 1,
     userId: 1,
     body: 'These are some thougts that a person thought were relevant and decided to post for all his friends to see',
   },
   {
+    id: 2,
     userId: 1,
     body: 'User id 1 post 2',
   },
@@ -134,6 +136,13 @@ const friendshipData = [
   { userId1: 2, userId2: 1 },
   { userId1: 3, userId2: 1 },
   { userId1: 1, userId2: 3 },
+]
+
+// -------------------- LIKES -------------------------
+
+const likeData = [
+  { userId: 1, postId: 2 },
+  { userId: 2, postId: 2 },
 ]
 
 // ------------------------------------------------------
@@ -173,6 +182,9 @@ export default async () => {
 
     // Delete all records before adding
 
+    console.log('deleting likes')
+    await db.like.deleteMany()
+
     console.log('deleting friendships :(')
     await db.friendship.deleteMany()
 
@@ -202,6 +214,10 @@ export default async () => {
 
     for (const friendRequest of friendRequestData) {
       await db.friendRequest.create({ data: friendRequest })
+    }
+
+    for (const like of likeData) {
+      await db.like.create({ data: like })
     }
   } catch (error) {
     console.warn('Please define your seed data.')
