@@ -52,7 +52,7 @@ const Layout = ({ children }: LayoutProps) => {
                     </div>
                   </div>
                   <Link to={routes.profile({ id: currentUser?.id })}>
-                    <div className="flex flex h-auto items-center justify-center gap-2">
+                    <div className="flex h-auto items-center justify-center gap-2">
                       <p className=" text-white">
                         Logged in as{' '}
                         <strong className="text-white">

@@ -14,6 +14,8 @@ export const userData = [
     hashedPassword:
       '8cb597d670a029923c30af8388d23f52750ede8c5926079647421f281f9f7e0f',
     salt: 'e57cdaee6b0d0b57ae0b157c6cbb7f96',
+    profilePic:
+      'https://firebasestorage.googleapis.com/v0/b/new-facebook-ace12.appspot.com/o/images%2Fmstom_400x400.jpg?alt=media&token=76eaf10a-e563-427c-b812-e8ab217ba9f5',
   },
   {
     id: 2,
