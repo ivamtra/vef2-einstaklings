@@ -141,28 +141,6 @@ const SignupPage = () => {
                   />
                   <FieldError name="name" className="rw-field-error" />
 
-                  {/* Referral */}
-
-                  <Label
-                    name="name"
-                    className="rw-label"
-                    errorClassName="rw-label rw-label-error"
-                  >
-                    Referral id
-                  </Label>
-                  <TextField
-                    name="referralId"
-                    className="rw-input"
-                    errorClassName="rw-input rw-input-error"
-                    validation={{
-                      required: {
-                        value: true,
-                        message: 'Referral id is required',
-                      },
-                    }}
-                  />
-                  <FieldError name="name" className="rw-field-error" />
-
                   {/* Password */}
 
                   <Label
@@ -185,6 +163,28 @@ const SignupPage = () => {
                     }}
                   />
                   <FieldError name="password" className="rw-field-error" />
+
+                  {/* Referral */}
+
+                  <Label
+                    name="name"
+                    className="rw-label"
+                    errorClassName="rw-label rw-label-error"
+                  >
+                    Friend referral id
+                  </Label>
+                  <TextField
+                    name="referralId"
+                    className="rw-input"
+                    errorClassName="rw-input rw-input-error"
+                    validation={{
+                      required: {
+                        value: true,
+                        message: 'Referral id is required',
+                      },
+                    }}
+                  />
+                  <FieldError name="referralId" className="rw-field-error" />
 
                   <div className="rw-button-group">
                     <Submit className="rw-button rw-button-blue">
