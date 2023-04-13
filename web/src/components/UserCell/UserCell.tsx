@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 import type { FindUserQuery, FindUserQueryVariables } from 'types/graphql'
 
-import { Link, routes } from '@redwoodjs/router'
 import {
   type CellSuccessProps,
   type CellFailureProps,
@@ -12,25 +11,15 @@ import {
 
 import { useAuth } from 'src/auth'
 
+import FriendListCell from '../FriendListCell'
+import { DELETE_FRIEND_REQUEST } from '../FriendRequestCell'
+import { CREATE_FRIENDSHIP } from '../FriendRequestCell'
+
 export const QUERY = gql`
   query FindUserQuery($id: Int!) {
     user: user(id: $id) {
       id
       email
-      profilePic
-      name
-    }
-  }
-`
-
-export const friendsQuery = gql`
-  query findFriends($userId: Int!) {
-    friends: friends(userId: $userId) {
-      id
-      email
-      friends {
-        userId2
-      }
       profilePic
       name
     }
@@ -52,6 +41,13 @@ export const CREATE_FRIEND_REQUEST = gql`
     }
   }
 `
+export const SENT_FRIEND_REQUEST = gql`
+  query SentFriendRequest($recieverId: Int!, $senderId: Int!) {
+    sentFriendRequest(recieverId: $recieverId, senderId: $senderId) {
+      id
+    }
+  }
+`
 
 export const Loading = () => <div>Loading...</div>
 
@@ -66,14 +62,6 @@ export const Failure = ({
 export const Success = ({
   user,
 }: CellSuccessProps<FindUserQuery, FindUserQueryVariables>) => {
-  // TODO error höndlun
-  const {
-    loading,
-    data: friendsData,
-    error,
-  } = useQuery(friendsQuery, {
-    variables: { userId: user.id },
-  })
   const { currentUser } = useAuth()
   useEffect(() => console.log(checkFriendshipData))
   const { data: checkFriendshipData } = useQuery(FRIENDSHIP_BY_USER_IDS, {
@@ -83,25 +71,75 @@ export const Success = ({
     },
   })
 
+  const { data: sentFriendRequest } = useQuery(SENT_FRIEND_REQUEST, {
+    variables: {
+      senderId: currentUser?.id,
+      recieverId: user.id,
+    },
+  })
+  const { data: recievedFriendRequest } = useQuery(SENT_FRIEND_REQUEST, {
+    variables: {
+      senderId: user.id,
+      recieverId: currentUser?.id,
+    },
+  })
+
+  const [createFriendship] = useMutation(CREATE_FRIENDSHIP, {
+    refetchQueries: [SENT_FRIEND_REQUEST],
+    variables: { senderId: currentUser?.id, recieverId: user.id },
+  })
+  const [deleteFriendRequest] = useMutation(DELETE_FRIEND_REQUEST)
+  const hasSentFriendRequest = sentFriendRequest?.sentFriendRequest
+  useEffect(() => console.log(hasSentFriendRequest))
   const sendFriendRequest = async () => {
     const recieverId = user.id
     const senderId = currentUser?.id
-    try {
-      const response = await createFriendRequest({
+
+    // Athuga fyrst hvort að reciever er nú þegar búinn að senda friend request
+    // Þá addast hann sjálfkrafa sem vinur
+    if (recievedFriendRequest.sentFriendRequest) {
+      // Eyða friend requesti frá viðkomandi user
+      console.log(recievedFriendRequest)
+      await deleteFriendRequest({
         variables: {
-          input: {
-            recieverId,
-            senderId,
-          },
+          id: recievedFriendRequest.sentFriendRequest.id,
         },
       })
-      console.log(response)
-    } catch (err) {
-      console.error(err)
+      // Búa til friendship með user
+      await createFriendship({
+        variables: {
+          input: { userId1: currentUser?.id, userId2: user.id },
+        },
+      })
+      await createFriendship({
+        variables: {
+          input: { userId1: user.id, userId2: currentUser?.id },
+        },
+      })
+      // Nennis að refetcha
+      window.location.reload()
+    } else {
+      // Senda friend request
+      try {
+        const response = await createFriendRequest({
+          variables: {
+            input: {
+              recieverId,
+              senderId,
+            },
+          },
+        })
+        console.log(response)
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 
-  const [createFriendRequest] = useMutation(CREATE_FRIEND_REQUEST)
+  const [createFriendRequest] = useMutation(CREATE_FRIEND_REQUEST, {
+    refetchQueries: [SENT_FRIEND_REQUEST],
+    variables: { senderId: currentUser?.id, recieverId: user.id },
+  })
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
@@ -116,7 +154,8 @@ export const Success = ({
 
       {/* TODO:  Athuga hvort að búið er að senda request nú þegar */}
       {!checkFriendshipData?.friendshipByUserIds &&
-      user.id !== currentUser?.id ? (
+      user.id !== currentUser?.id &&
+      !hasSentFriendRequest ? (
         <div>
           <button
             onClick={sendFriendRequest}
@@ -126,39 +165,13 @@ export const Success = ({
           </button>
         </div>
       ) : (
-        <>
-          <h1>Poop</h1>
-        </>
+        <></>
       )}
-
       {/* TODO Setja logic í sér component */}
 
-      <h4 className="mt-8 text-xl font-semibold text-gray-600">Friends</h4>
-      {/* TODO Setja i component */}
       {/* List of friends */}
-      {friendsData?.friends?.map((friend) => {
-        return (
-          <ul key={friend.id} className="mt-4">
-            <li className="mt-4 flex items-center">
-              <img
-                src={friend.profilePic}
-                alt=""
-                className="mr-4 h-12 w-12 rounded-full"
-              />
-              <div>
-                <p className="text-lg">{friend.name}</p>
-                <Link
-                  to={routes.profile({ id: friend.id })}
-                  className="text-blue-500 transition duration-200 hover:text-blue-700"
-                >
-                  View Profile
-                </Link>
-              </div>
-            </li>
-          </ul>
-        )
-      })}
-      {/* TODO Setja i component */}
+
+      <FriendListCell userId={user.id} />
     </div>
   )
 }

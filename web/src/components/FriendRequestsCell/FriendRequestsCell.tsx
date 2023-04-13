@@ -18,7 +18,7 @@ export const Loading = () => <div>Loading...</div>
 
 export const Empty = () => {
   return (
-    <div className="absolute right-3/4 flex w-[200px] flex-col items-center justify-center gap-3 rounded-lg border bg-white p-2 sm:flex-row">
+    <div className="absolute right-[200px] flex w-[200px] flex-col items-center justify-center gap-3 rounded-lg border bg-white p-2 sm:flex-row">
       No friend requests
     </div>
   )

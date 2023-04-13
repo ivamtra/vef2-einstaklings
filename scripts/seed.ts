@@ -68,30 +68,30 @@ export const userData = [
 // -------------------- Friend requests -------------------------
 
 export const friendRequestData = [
-  // {
-  //   recieverId: 2,
-  //   senderId: 1,
-  // },
-  // {
-  //   recieverId: 1,
-  //   senderId: 5,
-  // },
-  // {
-  //   recieverId: 1,
-  //   senderId: 7,
-  // },
-  // {
-  //   recieverId: 1,
-  //   senderId: 6,
-  // },
-  // {
-  //   recieverId: 3,
-  //   senderId: 1,
-  // },
-  // {
-  //   recieverId: 5,
-  //   senderId: 2,
-  // },
+  {
+    recieverId: 2,
+    senderId: 1,
+  },
+  {
+    recieverId: 1,
+    senderId: 5,
+  },
+  {
+    recieverId: 1,
+    senderId: 7,
+  },
+  {
+    recieverId: 1,
+    senderId: 6,
+  },
+  {
+    recieverId: 3,
+    senderId: 1,
+  },
+  {
+    recieverId: 5,
+    senderId: 2,
+  },
 ]
 
 // -------------------- POSTS -------------------------
