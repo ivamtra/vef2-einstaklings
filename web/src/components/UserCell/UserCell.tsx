@@ -147,7 +147,10 @@ export const Success = ({
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
+      <h1>Hello {currentUser.name}</h1>
+      <p className="mb-5">Your referral id is {currentUser.id}</p>
       <p className="text-3xl font-bold text-gray-600">{user.name}</p>
+
       <div className="flex items-center gap-3">
         <img
           className="mx-auto mt-2 h-48 w-48 rounded-full"
