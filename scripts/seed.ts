@@ -110,22 +110,27 @@ export const postData = [
     body: 'User id 1 post 2',
   },
   {
+    id: 3,
     userId: 1,
     body: 'User id 1 post 3',
   },
   {
+    id: 4,
     userId: 2,
     body: 'Feeling grateful for a beautiful day spent in nature with loved ones.',
   },
   {
+    id: 5,
     userId: 3,
     body: 'Just finished an amazing book that I highly recommend to everyone!',
   },
   {
+    id: 6,
     userId: 4,
     body: 'Excited to start a new project at work and see where it takes me!',
   },
   {
+    id: 7,
     userId: 5,
     body: 'Missing my childhood friend and reminiscing about the good old days.',
   },
@@ -134,17 +139,17 @@ export const postData = [
 // -------------------- Friendships -------------------------
 
 const friendshipData = [
-  { userId1: 1, userId2: 2 },
-  { userId1: 2, userId2: 1 },
-  { userId1: 3, userId2: 1 },
-  { userId1: 1, userId2: 3 },
+  { id: 1, userId1: 1, userId2: 2 },
+  { id: 2, userId1: 2, userId2: 1 },
+  { id: 3, userId1: 3, userId2: 1 },
+  { id: 4, userId1: 1, userId2: 3 },
 ]
 
 // -------------------- LIKES -------------------------
 
 const likeData = [
-  { userId: 1, postId: 2 },
-  { userId: 2, postId: 2 },
+  { id: 1, userId: 1, postId: 2 },
+  { id: 2, userId: 2, postId: 2 },
 ]
 
 // ------------------------------------------------------
@@ -209,17 +214,21 @@ export default async () => {
 
     for (const friendship of friendshipData) {
       await db.friendship.create({ data: friendship })
+      console.log('Created friendship', friendship)
     }
     for (const post of postData) {
       await db.post.create({ data: post })
+      console.log('Created post', post)
     }
 
     for (const friendRequest of friendRequestData) {
       await db.friendRequest.create({ data: friendRequest })
+      console.log('Created friendRequest', friendRequest)
     }
 
     for (const like of likeData) {
       await db.like.create({ data: like })
+      console.log('Created like', like)
     }
   } catch (error) {
     console.warn('Please define your seed data.')

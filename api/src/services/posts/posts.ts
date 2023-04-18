@@ -14,7 +14,7 @@ export const postsByFriends: QueryResolvers['posts'] = ({ userId }: any) => {
   // Passar að það se current user áður en query-að
   if (context.currentUser.id !== userId) return []
 
-  return db.$queryRaw`SELECT * FROM POST WHERE userId in (SELECT userId2 from friendship where userId1 = ${userId}) or userId = ${userId} ORDER BY createdAt DESC`
+  return db.$queryRaw`SELECT * FROM "Post" WHERE userId in (SELECT userId2 from friendship where userId1 = ${userId}) or userId = ${userId} ORDER BY createdAt DESC`
 }
 
 export const post: QueryResolvers['post'] = ({ id }) => {
