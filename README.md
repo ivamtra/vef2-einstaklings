@@ -1,4 +1,24 @@
-# README
+# ChatHub
+
+Branches
+- main
+  - Aðal branchið til að vera að committa á
+  - Inniheldur dev build
+  - Allt local
+- Production
+  - Inniheldur production build
+  - Gagnagrunnur á railway
+
+
+##
+
+
+## Uppsetning á eigin tölvu
+
+
+
+
+## Redwood
 
 Welcome to [RedwoodJS](https://redwoodjs.com)!
 
