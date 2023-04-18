@@ -1,9 +1,5 @@
 # ChatHub
 
-
-
-
-
 ## Features
 
 
@@ -70,10 +66,10 @@ React componentar eru búnir til til að útfæra alla API virkni.
 
 ### Kröfur
 Þetta webapp útfærir 4 meginkröfur sem gefnar voru fyrir verkefnið sem eru:
-- Notendaumsjón
-- API útfærður með GraphQL
-- Viðmót útfært með template máli (React)
-- Gagnagrunnur notaður (Postgres í production, sqlite í dev)
+- Notendaumsjón ✅
+- API útfærður með GraphQL ✅
+- Viðmót útfært með template máli (React) ✅
+- Gagnagrunnur notaður (Postgres í production, sqlite í dev) ✅
 ## Branches
 - main
   - Aðal branchið fyrir nýja featura
@@ -84,8 +80,46 @@ React componentar eru búnir til til að útfæra alla API virkni.
   - Gagnagrunnur á railway
   - Client og API tengjast við netlify
 
-## Uppsetning á eigin tölvu
+## Uppsetning á eigin tölvu með yarn
 
+### Forkrafa:
+> **Prerequisites**
+>
+> - Redwood requires [Node.js](https://nodejs.org/en/) (>=14.19.x <=16.x) and [Yarn](https://yarnpkg.com/) (>=1.15)
+> - Are you on Windows? For best results, follow our [Windows development setup](https://redwoodjs.com/docs/how-to/windows-development-setup) guide
+
+### Ath.
+Gæti verið aðeins öðruvísi á Windows
+
+
+### Uppsetning
+
+1. Byrjaðu á að keyra
+```
+yarn
+```
+til að fá öll dependency.
+
+2. Keyrðu nú
+```
+yarn rw prisma migrate dev
+```
+til að setja upp gagnagrunninn.
+
+3. Keyrðu
+
+```
+yarn rw setup auth dbAuth
+```
+Veldu **No** fyrir hvert prompt sem kemur upp.
+
+Nú hefur þú sett upp auðkenningu locally.
+
+4. Nú getur þú keyrt
+```
+yarn rw dev
+```
+Það keyrir upp vefþjónustuna, líklegast á localhost:8910 og þar geturðu notað síðuna á þinni eigin tölvu.
 
 
 ## Test accountar
