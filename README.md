@@ -89,7 +89,7 @@ React componentar eru búnir til til að útfæra alla API virkni.
 > - Are you on Windows? For best results, follow our [Windows development setup](https://redwoodjs.com/docs/how-to/windows-development-setup) guide
 
 ### Ath.
-Gæti verið aðeins öðruvísi á Windows
+Gæti verið aðeins öðruvísi á Windows, mæli með að skoða hlekkinn fyrir ofan.
 
 
 ### Uppsetning
@@ -122,6 +122,8 @@ yarn rw dev
 Það keyrir upp vefþjónustuna, líklegast á localhost:8910 og þar geturðu notað síðuna á þinni eigin tölvu.
 
 
+
+Ef það er eitthvað vesen þá er alltaf hægt að fara inn á live síðuna
 ## Test accountar
 
 Innifalið í þessu repo-i eru 7 test aðgangar. Þeir eru test1, test2 ... test7. Allir aðgangarnir hafa sama lykilorð sem er **pass**.
