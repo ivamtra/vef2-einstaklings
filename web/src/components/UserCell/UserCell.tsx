@@ -147,8 +147,15 @@ export const Success = ({
 
   return (
     <div className="flex flex-col items-center justify-center text-center">
-      <h1>Hello {currentUser.name}</h1>
-      <p className="mb-5">Your referral id is {currentUser.id}</p>
+      {currentUser?.id === user.id ? (
+        <>
+          <h1>Hello {currentUser.name}</h1>
+          <p className="mb-5">Your referral id is {currentUser.id}</p>
+        </>
+      ) : (
+        <></>
+      )}
+
       <p className="text-3xl font-bold text-gray-600">{user.name}</p>
 
       <div className="flex items-center gap-3">
