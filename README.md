@@ -10,8 +10,8 @@ Branches
   - Gagnagrunnur á railway
 
 
-##
 
+## Features
 
 ## Uppsetning á eigin tölvu
 
